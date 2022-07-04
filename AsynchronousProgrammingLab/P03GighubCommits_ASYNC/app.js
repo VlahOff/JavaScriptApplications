@@ -9,8 +9,10 @@ async function loadCommits() {
             throw new Error(`${response.status}(${response.statusText})`);
         }
 
-        const data = await response.json()
+        const data = await response.json();
+        console.log(data)
         for (const commit of data) {
+            list.innerHTML = '';
             const li = document.createElement('li');
             const p = document.createElement('p');
             p.textContent = `${commit.commit.author.name}: ${commit.commit.message}`;
@@ -18,6 +20,6 @@ async function loadCommits() {
             list.appendChild(li);
         }
     } catch (error) {
-        list.innerHTML = `${error}`
+        list.innerHTML = `${error}`;
     }
 }
