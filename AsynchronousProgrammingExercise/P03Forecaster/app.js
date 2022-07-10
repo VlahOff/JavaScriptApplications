@@ -68,7 +68,6 @@ function attachEvents() {
             .catch(error => console.log(error));
 
     });
-    console.log('hello')
 }
 
 attachEvents();
