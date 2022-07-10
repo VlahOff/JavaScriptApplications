@@ -69,38 +69,6 @@ function attachEvents() {
 
     });
 
-    function currentWeather(condition, location, low, high) {
-        const div = document.createElement('div');
-        div.setAttribute('class', 'forecasts');
-
-        const conditionSpan = document.createElement('span');
-        conditionSpan.setAttribute('class', 'condition symbol');
-        let sym = condition.toLowerCase();
-        conditionSpan.innerHTML = `${conditionIcons[sym]}`;
-        div.appendChild(conditionSpan);
-
-        const mainSpan = document.createElement('span');
-        mainSpan.setAttribute('class', 'condition');
-
-        const locSpan = document.createElement('span');
-        locSpan.setAttribute('class', 'forecast-data');
-        locSpan.textContent = location;
-        mainSpan.appendChild(locSpan);
-
-        const tempSpan = document.createElement('span');
-        tempSpan.setAttribute('class', 'forecast-data');
-        tempSpan.innerHTML = `${low}${degrees}/${high}${degrees}`;
-        mainSpan.appendChild(tempSpan);
-
-        const conSpan = document.createElement('span');
-        conSpan.setAttribute('class', 'forecast-data');
-        conSpan.textContent = condition;
-        mainSpan.appendChild(conSpan);
-
-        div.appendChild(mainSpan);
-
-        return div;
-    }
 }
 
 attachEvents();
