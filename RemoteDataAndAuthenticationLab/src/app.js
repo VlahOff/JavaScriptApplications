@@ -47,6 +47,7 @@ function createRecipeCard(recipe) {
 }
 
 window.addEventListener('load', async () => {
+    checkUser();
     const main = document.querySelector('main');
 
     const recipes = await getRecipes();
@@ -55,6 +56,15 @@ window.addEventListener('load', async () => {
     main.innerHTML = '';
     cards.forEach(c => main.appendChild(c));
 });
+
+function checkUser() {
+    const token = sessionStorage.getItem('accessToken');
+    if (token != null) {
+        document.getElementById('user').style.display = 'inline-block';
+    } else {
+        document.getElementById('guest').style.display = 'inline-block';
+    }
+}
 
 function e(type, attributes, ...content) {
     const result = document.createElement(type);
