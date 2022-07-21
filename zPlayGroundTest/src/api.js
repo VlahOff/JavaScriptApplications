@@ -1,13 +1,16 @@
 const host = 'http://localhost:3030';
 
-export async function request(url, data) {
+async function request(method, url, data) {
     const options = {
-        method: 'post',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data)
+        method,
+        headers: {},
+        
     };
+
+    if (data !== undefined) {
+        options.headers['Content-Type'] = 'application/json';
+        options.body = JSON.stringify(data)
+    }
 
     const userData = JSON.parse(sessionStorage.getItem('userData'));
 
@@ -30,4 +33,12 @@ export async function request(url, data) {
         alert(err.message);
         throw err;
     }
+}
+
+export async function get(url) {
+    return request('get', url);
+}
+
+export async function post(url, data) {
+    return request('post', url, data);
 }

@@ -2,6 +2,6 @@ const section = document.getElementById('homeView');
 section.remove();
 
 
-export function showHome() {
-    document.querySelector('main').replaceChildren(section);
+export function showHome(ctx) {
+    ctx.render(section);
 }

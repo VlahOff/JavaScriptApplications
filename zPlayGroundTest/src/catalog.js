@@ -1,14 +1,15 @@
+import { get } from "./api.js";
+
 const section = document.getElementById('catalogView');
 const list = section.querySelector('ul');
 section.remove();
 
-export async function showCatalog() {
-    document.querySelector('main').replaceChildren(section);
+export async function showCatalog(ctx) {
+    ctx.render(section);
 
     list.replaceChildren('Loading...');
 
-    const res = await fetch('http://localhost:3030/data/movies');
-    const movies = await res.json();
+    const movies = await get('/data/movies')
 
     const fragment = document.createDocumentFragment();
 

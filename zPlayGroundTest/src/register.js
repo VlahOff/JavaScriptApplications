@@ -1,4 +1,4 @@
-import { request } from './api.js';
+import { post } from './api.js';
 import { showHome } from './home.js';
 import { checkUserNav } from './util.js';
 
@@ -8,8 +8,8 @@ form.addEventListener('submit', onSubmit);
 section.remove();
 
 
-export function showRegister() {
-    document.querySelector('main').replaceChildren(section);
+export function showRegister(ctx) {
+    ctx.render(section);
 }
 
 async function onSubmit(event) {
@@ -27,7 +27,7 @@ async function onSubmit(event) {
         return alert('Passwords don\'t match!');
     }
 
-    const { accessToken, _id } = await request('/users/register', { email, password });
+    const { accessToken, _id } = await post('/users/register', { email, password });
     const userData = {
         email,
         accessToken,

@@ -1,4 +1,4 @@
-import { request } from './api.js';
+import { post } from './api.js';
 import { showHome } from './home.js';
 import { checkUserNav } from './util.js';
 
@@ -8,8 +8,8 @@ const form = section.querySelector('form');
 form.addEventListener('submit', onSubmit);
 section.remove();
 
-export function showLogin() {
-    document.querySelector('main').replaceChildren(section);
+export function showLogin(ctx) {
+    ctx.render(section);
 }
 
 async function onSubmit(event) {
@@ -19,7 +19,7 @@ async function onSubmit(event) {
     const email = formData.get('email').trim();
     const password = formData.get('password').trim();
 
-    const data = await request('/users/login', {email, password});
+    const data = await post('/users/login', {email, password});
 
     const userData = {
         email: data.email,
