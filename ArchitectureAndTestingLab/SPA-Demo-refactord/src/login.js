@@ -1,8 +1,9 @@
 import { post } from './api.js';
+import { createSubmitHandler } from './util.js';
 
 const section = document.getElementById('loginView');
 const form = section.querySelector('form');
-form.addEventListener('submit', onSubmit);
+createSubmitHandler(form, onSubmit);
 section.remove();
 let ctx = null;
 
@@ -11,13 +12,7 @@ export function showLogin(inCtx) {
     ctx.render(section);
 }
 
-async function onSubmit(event) {
-    event.preventDefault();
-    const formData = new FormData(form);
-
-    const email = formData.get('email').trim();
-    const password = formData.get('password').trim();
-
+async function onSubmit({ email, password }) {
     const data = await post('/users/login', { email, password });
 
     const userData = {
