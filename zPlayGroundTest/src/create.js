@@ -1,12 +1,13 @@
 import { post } from './api.js';
-import { showCatalog } from './catalog.js';
 
 const section = document.getElementById('createView');
 const form = section.querySelector('form');
 form.addEventListener('submit', onSubmit);
 section.remove();
+let ctx = null;
 
-export function showCreate(ctx) {
+export function showCreate(inCtx) {
+    ctx = inCtx;
     ctx.render(section);
 }
 
@@ -17,5 +18,5 @@ async function onSubmit(event) {
     const title = formData.get('title').trim();
 
     await post('/data/movies', { title });
-    showCatalog();
+    ctx.goTo('catalogBtn');
 }

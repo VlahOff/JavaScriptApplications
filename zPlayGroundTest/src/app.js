@@ -9,8 +9,6 @@ import { render } from './dom.js';
 
 
 document.querySelector('nav').addEventListener('click', onNavigate);
-document.getElementById('logoutBtn').addEventListener('click', onLogout);
-checkUserNav();
 
 const sections = {
     'homeBtn': showHome,
@@ -19,8 +17,10 @@ const sections = {
     'loginBtn': showLogin,
     'registerBtn': showRegister,
     'createBtn': showCreate,
+    'logoutBtn': onLogout
 };
 
+checkUserNav();
 // Start application in home view
 goTo('homeBtn');
 
@@ -39,7 +39,8 @@ function goTo(viewName) {
     if (typeof view == 'function') {
         view({
             render,
-            goTo
+            goTo,
+            checkUserNav
         });
         return true;
     } else {

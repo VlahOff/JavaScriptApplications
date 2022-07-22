@@ -1,14 +1,13 @@
 import { post } from './api.js';
-import { showHome } from './home.js';
-import { checkUserNav } from './util.js';
-
 
 const section = document.getElementById('loginView');
 const form = section.querySelector('form');
 form.addEventListener('submit', onSubmit);
 section.remove();
+let ctx = null;
 
-export function showLogin(ctx) {
+export function showLogin(inCtx) {
+    ctx = inCtx;
     ctx.render(section);
 }
 
@@ -19,7 +18,7 @@ async function onSubmit(event) {
     const email = formData.get('email').trim();
     const password = formData.get('password').trim();
 
-    const data = await post('/users/login', {email, password});
+    const data = await post('/users/login', { email, password });
 
     const userData = {
         email: data.email,
@@ -28,6 +27,6 @@ async function onSubmit(event) {
     };
 
     sessionStorage.setItem('userData', JSON.stringify(userData));
-    checkUserNav();
-    showHome();
+    ctx.checkUserNav();
+    ctx.goTo('homeBtn');
 }

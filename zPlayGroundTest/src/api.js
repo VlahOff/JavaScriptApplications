@@ -4,12 +4,12 @@ async function request(method, url, data) {
     const options = {
         method,
         headers: {},
-        
+
     };
 
     if (data !== undefined) {
         options.headers['Content-Type'] = 'application/json';
-        options.body = JSON.stringify(data)
+        options.body = JSON.stringify(data);
     }
 
     const userData = JSON.parse(sessionStorage.getItem('userData'));
@@ -26,9 +26,11 @@ async function request(method, url, data) {
             throw Error(error.message);
         }
 
-        const result = await res.json();
-
-        return result;
+        if (res.status == 204) {
+            return res;
+        } else {
+            return await res.json();
+        }
     } catch (err) {
         alert(err.message);
         throw err;
